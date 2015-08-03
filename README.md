@@ -1,22 +1,21 @@
 # Desafio de auto-complete e busca disponibilidade
 
-Neste problema você deve implementar o widget de busca de hoteis. Este desenvolvimento engloba o auto-complete de hoteis e a busca por disponibilidades quando o usuário informa um periodo de estadia. 
+Neste problema você deve implemetar um app de busca de hotéis. Este desenvolvimento engloba o auto-complete de hoteis e busca por disponibilidade quando o usuário informa um período de estadia.
 
-A interface em anexo precisa ser implementada assim como o backend para consumir a lista de hoteis e as disponibilidades. Tudo será avaliado. Faça o seu melhor na linguagem onde vc possui o maior domínio.
+A interface em anexo precisa ser implementada assim como o backend para consumir a lista de hotéis e as disponibilidades. Tudo será avaliado.
 
-***Restrições***
-* Eu preciso conseguir rodar seu código no mac os x OU no ubuntu;
-* Eu vou executar seu código com os seguintes comandos:
-
->1. *git clone seu-fork*
-2. *cd seu-fork*
-3. *comando para instalar dependências*
-4. *comando para executar a aplicação*
-
-Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e rodar seu programa. Pode considerar que eu tenho instalado no meu sistema Python, Java, PHP, Ruby e/ou Node. Qualquer outra dependência que eu precisar vc tem que prover.
-
-***Performance***
-* Preciso que os seus serviços suportem um volume de 1000 requisições por segundo
+***Passos***
+1. clone diretório
+2. criar os arquivos .json baseado nos arquivos de lista de hotéis e disponibilidades.
+3. entrar no diretório onde estão os arquivos .json e executar o seguinte comando "python -m SimpleHTTPServer".
+4. acessar localhost:8080/arquivocriado.json pelo app.
+5. mão na massa
 
 ***Artefatos***
-* Imagens e database de hoteis e disponibilidades estão na pasta arquivos
+* Imagens e arquivo de hoteis e disponibilidades estão na pasta arquivos
+
+***Ganha pontos se tiver***
+
+* Gestão de dependencias no projeto. Ex: [Cocoapods](http://cocoapods.org)
+* Mapeamento json -> Objeto . Ex: [Mantle](https://github.com/Mantle/Mantle)
+
