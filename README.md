@@ -6,6 +6,7 @@ A interface em anexo precisa ser implementada assim como o arquivo json para con
 
 ***Restrições***
 * Eu preciso conseguir rodar seu código no Android Studio OU OS X;
+* Teste integrado do código criado;
 * Eu vou executar seu código com os seguintes comandos:
 
 >1. *git clone seu-fork*
