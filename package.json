@@ -1,0 +1,25 @@
+{
+  "name": "desfiohu1",
+  "version": "0.0.1",
+  "description": "Hotel Urbano job challange",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thiagog3/desafiohu1.git"
+  },
+  "keywords": [
+    "csv",
+    "javascript"
+  ],
+  "author": "Thiago Sciotta <thiagog3@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/thiagog3/desafiohu1/pulls"
+  },
+  "homepage": "https://github.com/thiagog3/desafiohu1",
+  "devDependencies": {
+    "lokijs": "^1.3.7"
+  }
+}
