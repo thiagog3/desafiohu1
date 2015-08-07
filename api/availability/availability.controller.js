@@ -1,22 +1,22 @@
 'use strict';
 
 var q = require('q'),
-getHotelsCollection = require('../../config/database').getHotelsCollection;
+getAvailabilityCollection = require('../../config/database').getAvailabilityCollection;
 
-exports.search = function(req, res) {
+exports.list = function(req, res) {
 
-  var searchParameter = req.params.searchParameter;
+  var hotelId = parseInt(req.params.hotelId, 10) | 0;
+  var initialDate = req.body.initialDate;
+  var finalDate = req.body.finalDate;
 
-  getHotelsCollection().then(function(collection){
+  getAvailabilityCollection().then(function(collection){
+    var search = collection.find({'id': hotelId});
 
-  	var searchRegex = new RegExp(searchParameter, 'i');
-  	
-    var search = collection.find({'$or': [{
-    		hotel: { '$regex' : searchRegex }
-    	}, {
-    		local: { '$regex' : searchRegex }
-    	}]
-	});
+    if(initialDate && finalDate){
+      search = collection.where(function(obj){
+        return (obj.timestamp >= initialDate && obj.timestamp <=finalDate) && obj.id === hotelId;
+      });
+    }
     return res.status(200).json(search);
   });
 };
