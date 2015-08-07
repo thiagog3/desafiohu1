@@ -21,5 +21,12 @@
   "homepage": "https://github.com/thiagog3/desafiohu1",
   "devDependencies": {
     "lokijs": "^1.3.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "fs": "0.0.2",
+    "q": "^1.4.1"
   }
 }
