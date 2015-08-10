@@ -21,4 +21,9 @@ angular.module('desafiohu')
 		}
 		return hotel.hotel + ', ' + hotel.local;
 	}
+
+	$scope.clearSelected = function() {
+			$scope.selectedHotel = null;
+            $scope.$broadcast('clearHotelSelection');
+        };
 });

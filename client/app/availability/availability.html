@@ -1,8 +1,12 @@
 <form class="form-inline" role="form">
   <div class="form-group">
     <label><i class="fa fa-globe"></i> Hotel ou região</label>
-
-     <input type="text" ng-model="hotel" placeholder="Pequise por localidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control">
-
+     <div class="input-group">
+         <input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="Pequise por localidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus-on event="clearHotelSelection">
+         <span class="input-group-addon" ng-click="clearSelected()">Trocar</span>
+      </div>
   </div>
 </form>
+
+
+{{selectedHotel.hotel}}
