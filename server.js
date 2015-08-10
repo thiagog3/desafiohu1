@@ -13,6 +13,8 @@ app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+app.use(express.static('client'));
+
 var port = process.env.PORT || 9000;
 require('./routes')(app)
 

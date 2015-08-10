@@ -1,0 +1,8 @@
+<form class="form-inline" role="form">
+  <div class="form-group">
+    <label><i class="fa fa-globe"></i> Hotel ou região</label>
+
+     <input type="text" ng-model="hotel" placeholder="Pequise por localidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control">
+
+  </div>
+</form>

@@ -3,7 +3,20 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "~1.4.3",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "angular-resource": "~1.4.3",
+    "angular-sanitize": "~1.4.3",
+    "angular-route": "~1.4.3",
+    "angular-bootstrap": "~0.13.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    }
+  }
 }

@@ -3,20 +3,20 @@
 var q = require('q'),
 getHotelsCollection = require('../../config/database').getHotelsCollection;
 
-exports.search = function(req, res) {
+exports.query = function(req, res) {
 
-  var searchParameter = req.params.searchParameter;
+  var searchParameter = req.query.param;
 
   getHotelsCollection().then(function(collection){
 
   	var searchRegex = new RegExp(searchParameter, 'i');
   	
-    var search = collection.find({'$or': [{
+    var search = collection.chain().find({'$or': [{
     		hotel: { '$regex' : searchRegex }
     	}, {
     		local: { '$regex' : searchRegex }
     	}]
-	});
+	  }).limit(6).data();
     return res.status(200).json(search);
   });
 };
