@@ -23,7 +23,14 @@ angular.module('desafiohu')
 	}
 
 	$scope.clearSelected = function() {
-			$scope.selectedHotel = null;
-            $scope.$broadcast('clearHotelSelection');
-        };
+		$scope.selectedHotel = null;
+        $scope.$broadcast('clearHotelSelection');
+    };
+
+    $scope.startPickerOnSelect =  function(pikaday){
+    	$scope.endPicker.setMinDate(pikaday.getDate());
+    	$scope.endPicker.gotoDate(pikaday.getDate());
+
+    	$scope.endDateFocus = true;
+    };
 });

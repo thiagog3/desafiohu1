@@ -19,10 +19,10 @@
 							<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
 							<div class="row">
 								<div class="col-md-6">
-									<input pikaday="entrada" class="form-control" placeholder="entrada">
+									<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)">
 								</div>
 								<div class="col-md-6">
-									<input pikaday="saida" class="form-control" placeholder="saída">
+									<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus">
 								</div>
 							</div>
 							<div class="row">
