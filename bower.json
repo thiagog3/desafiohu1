@@ -8,7 +8,9 @@
     "angular-sanitize": "~1.4.3",
     "angular-route": "~1.4.3",
     "angular-bootstrap": "~0.13.2",
-    "angular-focus-on": "~0.10.0"
+    "angular-focus-on": "~0.10.0",
+    "moment": "~2.10.6",
+    "pikaday-angular": "~2.0.0"
   },
   "devDependencies": {},
   "overrides": {

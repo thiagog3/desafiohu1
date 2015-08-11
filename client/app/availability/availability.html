@@ -1,12 +1,53 @@
-<form class="form-inline" role="form">
-  <div class="form-group">
-    <label><i class="fa fa-globe"></i> Hotel ou região</label>
-     <div class="input-group">
-         <input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="Pequise por localidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus-on event="clearHotelSelection">
-         <span class="input-group-addon" ng-click="clearSelected()">Trocar</span>
-      </div>
-  </div>
-</form>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">Hoteis</div>
+		<div class="panel-body">
+			<form class="form" role="form">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
+							<div ng-class="{ 'input-group': selectedHotel.id != null }">
+								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="cidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus-on event="clearHotelSelection">
+								<span ng-if="selectedHotel.id != null" class="input-group-addon" ng-click="clearSelected()">Trocar</span>
+							</div>
+						</div>
+					</div>
 
+					<div class="col-md-6">
+						<div class="form-group">
+							<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
+							<div class="row">
+								<div class="col-md-6">
+									<input pikaday="entrada" class="form-control" placeholder="entrada">
+								</div>
+								<div class="col-md-6">
+									<input pikaday="saida" class="form-control" placeholder="saída">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Ainda não defini as datas
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-{{selectedHotel.hotel}}
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<button class="btn btn-primary">
+							<span class="glyphicon glyphicon-search"></span> 
+							Buscar
+						</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

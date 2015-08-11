@@ -6,11 +6,9 @@ getHotelsCollection = require('../../config/database').getHotelsCollection;
 exports.query = function(req, res) {
 
   var searchParameter = req.query.param;
-
+  
   getHotelsCollection().then(function(collection){
-
   	var searchRegex = new RegExp(searchParameter, 'i');
-  	
     var search = collection.chain().find({'$or': [{
     		hotel: { '$regex' : searchRegex }
     	}, {
