@@ -7,9 +7,9 @@
 					<div class="col-md-7">
 						<div class="form-group">
 							<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
-							<div ng-class="{ 'input-group': selectedHotel.id != null }">
-								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="cidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectHotelFocus">
-								<span ng-if="selectedHotel.id != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
+							<div ng-class="{ 'input-group': selectedHotel.city != null }">
+								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectHotelFocus" typeahead-template-url="itemTpl.html">
+								<span ng-if="selectedHotel.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
 							</div>
 						</div>
 					</div>
@@ -69,3 +69,14 @@
 		</table>
 	</div>
 </div>
+
+<script type="text/ng-template" id="itemTpl.html">
+   <a tabindex="-1" ng-if="match.model.type == 'hotel'">
+      <i class="glyphicon glyphicon-bed"></i>
+      <span ng-bind-html="match.model.hotel.name | typeaheadHighlight:query"></span>, <span style="color: orange;" ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
+   </a>
+   <a tabindex="-1" ng-if="match.model.type == 'city'">
+      <i class="glyphicon glyphicon-map-marker"></i>
+      <span ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
+   </a>
+</script>

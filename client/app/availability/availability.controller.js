@@ -5,7 +5,7 @@ angular.module('desafiohu')
 	
 	$scope.dateDisabled = false;
 
-	$scope.searchHotels = function(searchParameter){
+	$scope.searchPlaces = function(searchParameter){
 		var deferred = $q.defer();
 		HuResource.query({
 			module: 'hotels',
@@ -29,11 +29,14 @@ angular.module('desafiohu')
 		});
 	}
 
-	$scope.hotelDescription = function(hotel){
-		if(!hotel){
+	$scope.searchDescription = function(item){
+		if(!item){
 			return;
 		}
-		return hotel.hotel + ', ' + hotel.local;
+		if(item.type === 'hotel'){
+			return item.hotel.name + ', ' + item.city;
+		}
+		return item.city;
 	}
 
 	$scope.clearSelected = function() {
