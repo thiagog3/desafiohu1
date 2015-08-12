@@ -11,13 +11,14 @@ exports.list = function(req, res) {
   var endDate = req.query.endDate;
 
   getAvailabilityCollection().then(function(collection){
-    var search = collection.find({'id': hotelId});
+    var hotelSearch = collection.find({'id': hotelId});
 
     if(startDate && endDate){
-      search = collection.where(function(obj){
+      hotelSearch = collection.where(function(obj){
         return (obj.timestamp >= startDate && obj.timestamp <=endDate) && obj.id === hotelId;
       });
     }
-    return res.status(200).json(search);
+    
+    return res.status(200).json(hotelSearch);
   });
 };
