@@ -4,32 +4,32 @@
 		<div class="panel-body">
 			<form class="form" role="form">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-7">
 						<div class="form-group">
 							<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
 							<div ng-class="{ 'input-group': selectedHotel.id != null }">
-								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="cidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus-on event="clearHotelSelection">
-								<span ng-if="selectedHotel.id != null" class="input-group-addon" ng-click="clearSelected()">Trocar</span>
+								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.id != null" placeholder="cidade ou hotel" typeahead="hotel as hotelDescription(hotel) for hotel in searchHotels($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectHotelFocus">
+								<span ng-if="selectedHotel.id != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
 							<div class="row">
 								<div class="col-md-6">
-									<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)">
+									<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)" ng-disabled="disableDates">
 								</div>
 								<div class="col-md-6">
-									<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus">
+									<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus" ng-disabled="disableDates">
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox"> Ainda não defini as datas
+											<input type="checkbox" ng-model="disableDates"> Ainda não defini as datas
 										</label>
 									</div>
 								</div>
@@ -40,7 +40,7 @@
 
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<button class="btn btn-primary">
+						<button class="btn btn-primary" ng-click="getAvailability()">
 							<span class="glyphicon glyphicon-search"></span> 
 							Buscar
 						</button>
@@ -49,5 +49,23 @@
 
 			</form>
 		</div>
+	</div>
+	<div class="well">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Cidade</th>
+					<th>Hotel</th>
+					<th>Disponibilidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="availability in availabilities">
+					<td><span class="glyphicon glyphicon-map-marker"></span> {{selectedHotel.local}}
+					<td><span class="glyphicon glyphicon-bed"></span> {{selectedHotel.hotel}}
+					<td>{{availability.date | date:'dd-MM-yyyy'}}
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>

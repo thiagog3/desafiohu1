@@ -24,7 +24,6 @@ angular.module('desafiohu', [
 
   pikadayConfigProvider.setConfig({
     format: 'DD/MM/YYYY',
-    minDate: new Date(),
     i18n: {
       previousMonth : 'Mês anterior',
       nextMonth     : 'Próximo mês',

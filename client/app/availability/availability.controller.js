@@ -3,6 +3,8 @@
 angular.module('desafiohu')
 .controller('AvailabilityCtrl', function ($scope, HuResource, $q) {
 	
+	$scope.dateDisabled = false;
+
 	$scope.searchHotels = function(searchParameter){
 		var deferred = $q.defer();
 		HuResource.query({
@@ -15,6 +17,18 @@ angular.module('desafiohu')
 		return deferred.promise;
 	};
 
+	$scope.getAvailability = function(){
+		HuResource.query({
+			module: 'availability',
+			action: 'hotel',
+			id: $scope.selectedHotel.id,
+			startDate: $scope.startPicker.getDate().getTime(),
+			endDate: $scope.endPicker.getDate().getTime()
+		}, function(result){
+			$scope.availabilities = result;
+		});
+	}
+
 	$scope.hotelDescription = function(hotel){
 		if(!hotel){
 			return;
@@ -24,13 +38,19 @@ angular.module('desafiohu')
 
 	$scope.clearSelected = function() {
 		$scope.selectedHotel = null;
-        $scope.$broadcast('clearHotelSelection');
+		$scope.selectHotelFocus = true;
     };
 
     $scope.startPickerOnSelect =  function(pikaday){
     	$scope.endPicker.setMinDate(pikaday.getDate());
     	$scope.endPicker.gotoDate(pikaday.getDate());
-
     	$scope.endDateFocus = true;
     };
+
+
+    $scope.$watch('disableDates', function(newValue){
+    	if(!$scope.endPicker || !$scope.startPicker){ return; }
+    	$scope.endPicker.setDate(null);
+    	$scope.startPicker.setDate(null);
+    });
 });
