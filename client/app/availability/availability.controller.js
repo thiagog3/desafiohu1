@@ -18,13 +18,22 @@ angular.module('desafiohu')
 	};
 
 	$scope.getAvailability = function(){
-		HuResource.query({
+		var parameters = {
 			module: 'availability',
 			action: 'hotel',
-			id: $scope.selectedHotel.id,
 			startDate: $scope.startPicker.getDate().getTime(),
 			endDate: $scope.endPicker.getDate().getTime()
-		}, function(result){
+		};
+
+		if ($scope.selectedPlace.type === 'city') {
+			parameters.city = $scope.selectedPlace.city;
+		};
+
+		if ($scope.selectedPlace.type === 'hotel') {
+			parameters.hotelId = $scope.selectedPlace.hotel.id;
+		};
+
+		HuResource.query(parameters, function(result){
 			$scope.availabilities = result;
 		});
 	}
@@ -40,8 +49,8 @@ angular.module('desafiohu')
 	}
 
 	$scope.clearSelected = function() {
-		$scope.selectedHotel = null;
-		$scope.selectHotelFocus = true;
+		$scope.selectedPlace = null;
+		$scope.selectPlaceFocus = true;
     };
 
     $scope.startPickerOnSelect =  function(pikaday){

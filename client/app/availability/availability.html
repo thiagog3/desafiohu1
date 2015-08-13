@@ -7,9 +7,9 @@
 					<div class="col-md-7">
 						<div class="form-group">
 							<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
-							<div ng-class="{ 'input-group': selectedHotel.city != null }">
-								<input type="text" ng-model="selectedHotel" ng-readonly="selectedHotel.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectHotelFocus" typeahead-template-url="itemTpl.html">
-								<span ng-if="selectedHotel.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
+							<div ng-class="{ 'input-group': selectedPlace.city != null }">
+								<input type="text" ng-model="selectedPlace" ng-readonly="selectedPlace.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectPlaceFocus" typeahead-template-url="itemTpl.html">
+								<span ng-if="selectedPlace.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
 							</div>
 						</div>
 					</div>
@@ -61,9 +61,9 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="availability in availabilities">
-					<td><span class="glyphicon glyphicon-map-marker"></span> {{selectedHotel.local}}
-					<td><span class="glyphicon glyphicon-bed"></span> {{selectedHotel.hotel}}
-					<td>{{availability.date | date:'dd-MM-yyyy'}}
+					<td><span class="glyphicon glyphicon-map-marker"></span> {{availability.city}}</td>
+					<td><span class="glyphicon glyphicon-bed"></span> {{availability.hotel}}</td>
+					<td><b ng-repeat="time in availability.timestamp">{{time | date:'dd/MM/yyyy'}}{{$last ? '' : ', '}}</b></td>
 				</tr>
 			</tbody>
 		</table>
