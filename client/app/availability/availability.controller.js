@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('desafiohu')
-.controller('AvailabilityCtrl', function ($scope, HuResource, $q) {
+.controller('AvailabilityCtrl', function ($scope, HuResource, $q, $modal) {
 	
 	$scope.dateDisabled = false;
 
@@ -12,7 +12,7 @@ angular.module('desafiohu')
 			action: 'query',
 			param: searchParameter
 		}, function(result){
-			 deferred.resolve(result);
+			deferred.resolve(result);
 		});
 		return deferred.promise;
 	};
@@ -51,18 +51,29 @@ angular.module('desafiohu')
 	$scope.clearSelected = function() {
 		$scope.selectedPlace = null;
 		$scope.selectPlaceFocus = true;
-    };
+	};
 
-    $scope.startPickerOnSelect =  function(pikaday){
-    	$scope.endPicker.setMinDate(pikaday.getDate());
-    	$scope.endPicker.gotoDate(pikaday.getDate());
-    	$scope.endDateFocus = true;
-    };
+	$scope.startPickerOnSelect =  function(pikaday){
+		$scope.endPicker.setMinDate(pikaday.getDate());
+		$scope.endPicker.gotoDate(pikaday.getDate());
+		$scope.endDateFocus = true;
+	};
 
+	$scope.$watch('disableDates', function(newValue){
+		if(!$scope.endPicker || !$scope.startPicker){ return; }
+		$scope.endPicker.setDate(null);
+		$scope.startPicker.setDate(null);
+	});
 
-    $scope.$watch('disableDates', function(newValue){
-    	if(!$scope.endPicker || !$scope.startPicker){ return; }
-    	$scope.endPicker.setDate(null);
-    	$scope.startPicker.setDate(null);
-    });
+	$scope.viewAvailability = function(availabilityItem){
+		$scope.selectedAvailability = availabilityItem;
+		$scope.modalInstance=$modal.open({
+			templateUrl: 'availabilityModal.html',
+			scope:$scope
+		});
+	};
+
+	$scope.closeAvailability=function(){
+    $scope.modalInstance.dismiss();//$scope.modalInstance.close() also works I think
+};
 });

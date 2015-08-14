@@ -1,82 +1,134 @@
 <div class="container">
-	<div class="panel panel-default">
-		<div class="panel-heading">Hoteis</div>
-		<div class="panel-body">
-			<form class="form" role="form">
-				<div class="row">
-					<div class="col-md-7">
-						<div class="form-group">
-							<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
-							<div ng-class="{ 'input-group': selectedPlace.city != null }">
-								<input type="text" ng-model="selectedPlace" ng-readonly="selectedPlace.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectPlaceFocus" typeahead-template-url="itemTpl.html">
-								<span ng-if="selectedPlace.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
-							</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<div class="panel panel-default" id="search-panel">
+				<div class="panel-heading">
+					<h1><span class="glyphicon glyphicon-bed"></span> Hoteis</h1>
+				</div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="col-md-12">
+							<p class="slogan"><strong>+ 170.000</strong> hotéis, pousadas e resorts no mundo todo.</p>
 						</div>
 					</div>
 
-					<div class="col-md-5">
-						<div class="form-group">
-							<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
-							<div class="row">
-								<div class="col-md-6">
-									<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)" ng-disabled="disableDates">
-								</div>
-								<div class="col-md-6">
-									<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus" ng-disabled="disableDates">
+					<form class="form" role="form">
+						<div class="row">
+							<div class="col-md-7">
+								<div class="form-group">
+									<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
+									<div ng-class="{ 'input-group': selectedPlace.city != null }">
+										<input type="text" ng-model="selectedPlace" ng-readonly="selectedPlace.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectPlaceFocus" typeahead-template-url="itemTpl.html">
+										<span ng-if="selectedPlace.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
+									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" ng-model="disableDates"> Ainda não defini as datas
-										</label>
+
+							<div class="col-md-5">
+								<div class="form-group">
+									<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="inner-addon left-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+												<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)" ng-disabled="disableDates">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="inner-addon left-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+												<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus" ng-disabled="disableDates">
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" ng-model="disableDates"> Ainda não defini as datas
+												</label>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<button class="btn btn-primary" ng-click="getAvailability()">
-							<span class="glyphicon glyphicon-search"></span> 
-							Buscar
-						</button>
-					</div>
-				</div>
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-orange" ng-click="getAvailability()">
+									<span class="glyphicon glyphicon-search"></span> 
+									Buscar
+								</button>
+							</div>
+						</div>
 
-			</form>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="well">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Cidade</th>
-					<th>Hotel</th>
-					<th>Disponibilidade</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="availability in availabilities">
-					<td><span class="glyphicon glyphicon-map-marker"></span> {{availability.city}}</td>
-					<td><span class="glyphicon glyphicon-bed"></span> {{availability.hotel}}</td>
-					<td><b ng-repeat="time in availability.timestamp">{{time | date:'dd/MM/yyyy'}}{{$last ? '' : ', '}}</b></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Hotel</th>
+								<th>Cidade</th>
+								<th>Disponibilidade</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="availability in availabilities">
+								<td class="nowrap">
+									<span class="glyphicon glyphicon-bed"></span> {{availability.hotel}}
+								</td>
+								<td class="nowrap">
+									<span class="glyphicon glyphicon-map-marker"></span> {{availability.city}}
+								</td>
+								<td>
+									<div>
+										{{availability.timestamp.length}} dias 
+										<button class="btn btn-default pull-right" ng-click="viewAvailability(availability)"><span class="glyphicon glyphicon-calendar"></span> Ver</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
 <script type="text/ng-template" id="itemTpl.html">
-   <a tabindex="-1" ng-if="match.model.type == 'hotel'">
-      <i class="glyphicon glyphicon-bed"></i>
-      <span ng-bind-html="match.model.hotel.name | typeaheadHighlight:query"></span>, <span style="color: orange;" ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
-   </a>
-   <a tabindex="-1" ng-if="match.model.type == 'city'">
-      <i class="glyphicon glyphicon-map-marker"></i>
-      <span ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
-   </a>
+	<a tabindex="-1" ng-if="match.model.type == 'hotel'">
+		<i class="glyphicon glyphicon-bed"></i>
+		<span ng-bind-html="match.model.hotel.name | typeaheadHighlight:query"></span>, <span style="color: orange;" ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
+	</a>
+	<a tabindex="-1" ng-if="match.model.type == 'city'">
+		<i class="glyphicon glyphicon-map-marker"></i>
+		<span ng-bind-html="match.model.city | typeaheadHighlight:query"></span>
+	</a>
+</script>
+
+<script type="text/ng-template" id="availabilityModal.html">
+   <div class="modal-header">
+      <h3>Disponibilidade de datas</h3>
+   </div>   
+
+   <div class="modal-body">
+      <p>
+      	<b ng-repeat="time in selectedAvailability.timestamp">{{time | date:'dd/MM/yyyy'}}{{$last ? '' : ', '}}</b>
+      </p>
+   </div>
+
+   <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="closeAvailability()" data-dismiss="modal">Fechar
+      </button>
+   </div> 
 </script>

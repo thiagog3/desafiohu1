@@ -22,23 +22,33 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      express: {
+      scripts: {
         files: 'api/**/*.js',
         tasks: ['express:dev'],
         options: {
           spawn: false
         }
+      },
+      css: {
+        files: 'client/assets/**/*.less',
+        tasks: ['less']
+      },
+    },
+    less: {
+      dev:{
+        files: {
+          "client/assets/css/app.css": "client/assets/less/app.less"
+        }
       }
     }
   });
 
-  // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-wiredep');
 
-  // Default task.
   grunt.registerTask('default', ['server']);
-  grunt.registerTask('server', [ 'wiredep', 'express:dev', 'watch' ]);
+  grunt.registerTask('server', [ 'wiredep', 'less', 'express:dev', 'watch' ]);
 
 };

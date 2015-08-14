@@ -1,0 +1,62 @@
+body {
+  background: white;
+  font-family: 'Roboto';
+  margin: 20px;
+  color: #656565;
+}
+#search-panel .panel-heading {
+  background: #40bffb;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+}
+#search-panel .panel-heading h1 {
+  text-align: center;
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 26px;
+  padding: 5px;
+  margin: 0;
+}
+#search-panel .panel-body .slogan {
+  color: #40bffb;
+  font-size: 15px;
+  text-align: center !important;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.btn.btn-orange {
+  border-bottom-width: 2px;
+  border: rgba(235, 116, 9, 0.5) 0 solid;
+  margin: 0 auto;
+  width: 120px;
+  -moz-transition: none;
+  -webkit-transition: none;
+  transition: none;
+  background: #ff7900;
+  color: #fff !important;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.inner-addon {
+  position: relative;
+}
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: #ff8a21;
+}
+.inner-addon.left-addon .glyphicon {
+  left: 0px;
+}
+.inner-addon.left-addon input {
+  padding-left: 30px;
+}
+.inner-addon.right-addon .glyphicon {
+  right: 0px;
+}
+.inner-addon.right-addon input {
+  padding-right: 30px;
+}
