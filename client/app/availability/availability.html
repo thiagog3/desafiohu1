@@ -16,10 +16,30 @@
 					<form class="form" role="form">
 						<div class="row">
 							<div class="col-md-7">
-								<div class="form-group">
-									<label><i class="fa fa-globe"></i> Quer ficar aonde?</label>
+								<div class="form-group" ng-class="{ 'has-error': !isValidPlace}">
+									<label>
+										<i class="fa fa-globe"></i> Quer ficar aonde?
+									</label>
 									<div ng-class="{ 'input-group': selectedPlace.city != null }">
-										<input type="text" ng-model="selectedPlace" ng-readonly="selectedPlace.city != null" placeholder="cidade ou hotel" typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length="2" class="form-control" focus="selectPlaceFocus" typeahead-template-url="itemTpl.html">
+										<input 
+											type="text" 
+											name="place"
+											id="place"
+											ng-model="selectedPlace" 
+											ng-readonly="selectedPlace.city != null" 
+											placeholder="cidade ou hotel" 
+											typeahead="place as searchDescription(place) for place in searchPlaces($viewValue)" 
+											typeahead-loading="loadingLocations" 
+											typeahead-no-results="noResults"
+											typeahead-min-length="2" 
+											class="form-control" 
+											focus="selectPlaceFocus" 
+											typeahead-template-url="itemTpl.html"
+											typeahead-on-select="onSelectPlace()"
+											tooltip="{{isValidPlace ? '' : 'O campo não pode ficar vazio'}}"  
+          									tooltip-trigger="focus" 
+          									tooltip-placement="top"
+										>
 										<span ng-if="selectedPlace.city != null" class="input-group-addon" ng-click="clearSelected()"><span class="glyphicon glyphicon-transfer"></span> Trocar</span>
 									</div>
 								</div>
@@ -30,13 +50,13 @@
 									<label><i class="fa fa-globe"></i> Quando? (Entrada e saída)</label>
 									<div class="row">
 										<div class="col-md-6">
-											<div class="inner-addon left-addon">
+											<div class="inner-addon left-addon" ng-class="{ 'has-error': !isValidStartDate}">
 												<i class="glyphicon glyphicon-calendar"></i>
 												<input pikaday="startPicker" class="form-control" placeholder="entrada" on-select="startPickerOnSelect(pikaday)" ng-disabled="disableDates">
 											</div>
 										</div>
 										<div class="col-md-6">
-											<div class="inner-addon left-addon">
+											<div class="inner-addon left-addon" ng-class="{ 'has-error': !isValidEndDate}">
 												<i class="glyphicon glyphicon-calendar"></i>
 												<input pikaday="endPicker" class="form-control" placeholder="saída" focus="endDateFocus" ng-disabled="disableDates">
 											</div>
@@ -70,11 +90,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" ng-show="availabilities != undefined">
 		<div class="col-md-offset-2 col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<table class="table table-striped">
+					<div ng-show="availabilities.length == 0" class="text-center">Não existe disponibilidades para a data informada. </div>
+					<table class="table table-striped" ng-show="availabilities.length > 0">
 						<thead>
 							<tr>
 								<th>Hotel</th>

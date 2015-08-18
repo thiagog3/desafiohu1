@@ -3,7 +3,14 @@
 angular.module('desafiohu')
 .controller('AvailabilityCtrl', function ($scope, HuResource, $q, $modal) {
 	
-	$scope.dateDisabled = false;
+	var toggleValidation = function(bool){
+		$scope.dateDisabled = bool;
+		$scope.isValidPlace = bool;
+		$scope.isValidStartDate = bool;
+		$scope.isValidEndDate = bool;
+	};
+
+	toggleValidation(true);
 
 	$scope.searchPlaces = function(searchParameter){
 		var deferred = $q.defer();
@@ -17,13 +24,25 @@ angular.module('desafiohu')
 		return deferred.promise;
 	};
 
-	$scope.getAvailability = function(){
+	$scope.onSelectPlace = function(){
+		$scope.isValidPlace = true;
+	};
+
+	$scope.getAvailability = function(){	
+
+		if(!isValidFields()){
+			return;
+		}
+
 		var parameters = {
 			module: 'availability',
-			action: 'hotel',
-			startDate: $scope.startPicker.getDate().getTime(),
-			endDate: $scope.endPicker.getDate().getTime()
+			action: 'hotel'
 		};
+
+		if(!$scope.disableDates){
+			parameters.startDate = $scope.startPicker.getDate().getTime();
+			parameters.endDate = $scope.endPicker.getDate().getTime();
+		}
 
 		if ($scope.selectedPlace.type === 'city') {
 			parameters.city = $scope.selectedPlace.city;
@@ -57,6 +76,7 @@ angular.module('desafiohu')
 		$scope.endPicker.setMinDate(pikaday.getDate());
 		$scope.endPicker.gotoDate(pikaday.getDate());
 		$scope.endDateFocus = true;
+		$scope.isValidStartDate = true;
 	};
 
 	$scope.$watch('disableDates', function(newValue){
@@ -74,6 +94,27 @@ angular.module('desafiohu')
 	};
 
 	$scope.closeAvailability=function(){
-    $scope.modalInstance.dismiss();//$scope.modalInstance.close() also works I think
-};
+		$scope.modalInstance.dismiss();
+	};
+
+	var isValidFields = function(){
+
+		var isValid = true;
+		toggleValidation(true);
+
+		if(!$scope.selectedPlace){
+			$scope.isValidPlace = false;
+			isValid = false;
+		}
+		if(!$scope.disableDates && $scope.endPicker.getDate() === null){
+			$scope.isValidEndDate = false;
+			isValid = false;
+		}
+
+		if(!$scope.disableDates && $scope.startPicker.getDate() === null){
+			$scope.isValidStartDate = false;
+			isValid = false;
+		}
+		return isValid;
+	};
 });
