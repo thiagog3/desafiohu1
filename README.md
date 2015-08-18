@@ -2,7 +2,7 @@
 
 ***Comando para execução***
 
->1. *git clone https://github.com/thiagog3/desafiohu1.gitk*
+>1. *git clone https://github.com/thiagog3/desafiohu1.git*
 2. *cd desafiohu1*
 3. *npm install*
 4. *npm start*
