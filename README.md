@@ -1,4 +1,4 @@
-# Desafio de auto-complete e busca disponibilidade
+# Desafio de auto-complete e busca disponibilidade [![Build Status](https://travis-ci.org/thiagog3/desafiohu1.svg?branch=master)](https://travis-ci.org/thiagog3/desafiohu1) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 ***Comando para execução***
 
