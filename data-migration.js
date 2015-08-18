@@ -3,11 +3,13 @@ hoteisFile  = __dirname + '/artefatos/hoteis.txt',
 dispFile    = __dirname + '/artefatos/disp.txt',
 loki        = require('lokijs'),
 _           = require('lodash'),
+q           = require('q'),
 getHotelsCollection = require('./config/database').getHotelsCollection,
 getAvailabilityCollection = require('./config/database').getAvailabilityCollection;
 
-var importInitialData = function()
-{
+var importInitialData = function(){
+  var defered = q.defer();
+
   loader.loadCsv(hoteisFile, {
     withHeaders: false,
     intoObjects: true,
@@ -15,18 +17,15 @@ var importInitialData = function()
   }, function (data) {
 
     data.data.shift();
-
     function parseValues(el) {
       el['hotel'] = el['hotel'].trim();
       el['id'] = parseInt(el['id'], 10) | 0;
       return el;
     }
-
     getHotelsCollection().then(function(collection){
       data.data.forEach(function (el) {
         collection.insert(parseValues(el));
       });
-      console.log('Initial Hotel data migrated!');
     });
   });
 
@@ -60,9 +59,10 @@ var importInitialData = function()
         });
       });
     });
-
-    console.log('Initial Availability data migrated!');
   });
+
+  defered.resolve();
+  return defered.promise;
 }
 
 module.exports = {

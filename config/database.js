@@ -44,5 +44,5 @@ module.exports = {
   },
   getAvailabilityCollection: function(){
     return getCollection("availability", ['id', 'date']);
-  },
+  }
 };

@@ -123,8 +123,10 @@
 
    <div class="modal-body">
       <p>
-      	<b ng-repeat="time in selectedAvailability.timestamp">{{time | date:'dd/MM/yyyy'}}{{$last ? '' : ', '}}</b>
+      	<div ng-repeat="time in selectedAvailability.timestamp" class="col-md-3">{{time | date:'dd/MM/yyyy'}}</div>
+      	<div style="clear:both"></div>
       </p>
+
    </div>
 
    <div class="modal-footer">

@@ -4,7 +4,10 @@
   "description": "Hotel Urbano job challange",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "preinstall": "npm install -g bower grunt-cli",
+    "postinstall": "bower install",
+    "start": "grunt server",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -28,7 +31,20 @@
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-express-server": "^0.5.1",
-    "grunt-wiredep": "^2.0.0"
+    "grunt-karma": "^0.12.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-open": "^0.2.3",
+    "grunt-wiredep": "^2.0.0",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.9",
+    "karma-jasmine": "~0.1.5",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-spec-reporter": "0.0.20",
+    "mocha": "^2.2.5",
+    "open": "0.0.5",
+    "phantomjs": "^1.9.18",
+    "should": "^7.0.4",
+    "supertest": "^1.0.1"
   },
   "dependencies": {
     "body-parser": "^1.13.3",

@@ -1,7 +1,6 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
 
     wiredep: {
@@ -19,6 +18,11 @@ module.exports = function(grunt) {
           script: 'server.js',
           debug: true
         }
+      }
+    },
+    open: {
+      server: {
+        url: 'http://localhost:9000'
       }
     },
     watch: {
@@ -40,15 +44,32 @@ module.exports = function(grunt) {
           "client/assets/css/app.css": "client/assets/less/app.less"
         }
       }
+    },
+    mochaTest: {
+      options: {
+        reporter: 'spec',
+        timeout: 15000
+      },
+      api: ['api/**/*.spec.js']
+    },
+    karma: {
+      webapp: {
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        logLevel: 'INFO'
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-open');
 
   grunt.registerTask('default', ['server']);
-  grunt.registerTask('server', [ 'wiredep', 'less', 'express:dev', 'watch' ]);
-
+  grunt.registerTask('server', [ 'wiredep', 'less', 'express:dev', 'open', 'watch' ]);
+  grunt.registerTask('test', [ 'mochaTest', 'karma' ]);
 };

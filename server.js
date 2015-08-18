@@ -3,8 +3,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 var dataMigration = require('./data-migration');
 
-// Import initial data .txt to LokiJS
-dataMigration.importInitialData();
+dataMigration.importInitialData()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

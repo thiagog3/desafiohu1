@@ -12,7 +12,9 @@
     "moment": "~2.10.6",
     "pikaday-angular": "~2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "angular-mocks": "~1.4.4"
+  },
   "overrides": {
     "bootstrap": {
       "main": [
